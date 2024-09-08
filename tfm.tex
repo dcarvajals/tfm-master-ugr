@@ -18,9 +18,18 @@
 \usepackage{rotating}
 \usepackage[stable]{footmisc}
 \usepackage{float}
+\usepackage{textcomp}
+\usepackage{pifont}   
+\usepackage{wasysym}  
+\usepackage{fontawesome}
+
 %\usepackage{index}
 %\usepackage{doxygen/doxygen}
 %\usepackage{pdfpages}
+\newcommand{\starL}{\ding{72}} % estrella
+\newcommand{\rayo}{\lightning} % rayo
+\newcommand{\reloj}{\faClockO}  % Definir el reloj de arena con wasysym
+\newcommand{\monitor}{\faCog} % Definir el monitor con fontawesome
 
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-tabla]{babel}
@@ -189,8 +198,8 @@ pdfkeywords = {\palabrasClave}
 
 \input{capitulos/02_Estado_del_arte}
 \input{capitulos/03_Desarrollo_del_TFM}
-%\input{capitulos/04_Resultados_y_Discusion}
-%\input{capitulos/05_Conclusiones}
+\input{capitulos/04_Resultados_y_Discusion}
+\input{capitulos/05_Conclusiones}
 
 % ------------------------------------------------------------
 
