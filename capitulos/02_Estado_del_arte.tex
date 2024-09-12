@@ -1,4 +1,4 @@
-\label{chapter:estado-arte}\chapter[Estado del arte]{Estado del arte / Trabajos previos}
+\label{chapter:estado-arte}\chapter[Revisión y análisis de la literatura]{Revisión y análisis de la literatura}
 
 En este capítulo se presenta una revisión de los trabajos relacionados que constituyen el fundamento teórico y práctico de esta investigación. Se examinan los avances en modelos de lenguaje y NLP, el uso de técnicas de \textit{fine-tuning} para adaptar modelos pre-entrenados a tareas específicas, y las metodologías para la generación de diagramas UML a partir de texto natural. También se analizan las aplicaciones de IA en la ingeniería de software y se discuten las técnicas de evaluación y validación de modelos generativos. Esta revisión proporciona el contexto necesario para entender la relevancia y el impacto del uso de la IA en la generación automática de un diagrama de clases a partir de descripciones de casos de uso extendidos.
 
@@ -40,7 +40,33 @@ Bajaj et al. \cite{Bajaj2024} propone un enfoque para la identificación de micr
 
 Mohd et al. \cite{Arif2023} propone un método que combina UML y un marco \textit{non-functional requirements} (NFR) o en su traducción al español requisitos no funcionales para analizar los requisitos de un sistema de información. Este método sistemático utiliza diagramas UML para representar visualmente los elementos del sistema y sus interacciones, mejorando la claridad y precisión en la definición de requisitos. La investigación destaca la importancia de combinar enfoques basados en IA y metodologías tradicionales de ingeniería de software para ofrecer soluciones más robustas y efectivas. 
 
+\subsection{Conclusiones}
+
 Al relacionar los estudios \cite{Cámara2023}\cite{Bajaj2024}\cite{Arif2023} , se evidencia una tendencia hacia el uso de herramientas de modelado avanzado para enfrentar los desafíos en la ingeniería de software, optimizando tanto la precisión como la eficiencia en el diseño de sistemas complejos. La combinación de IA generativa y técnicas de modelado tradicionales promete mejorar significativamente la calidad y escalabilidad del desarrollo de software, destacando la necesidad de una colaboración continua entre la comunidad de modelado de software y los desarrolladores de IA.
+
+Para comprender mejor el uso de los modelos utilizados en los trabajos mencionados, la tabla \ref{tab:comparacion-modelos} muestra una comparación de todos los modelos evaluando algunas de sus capacidades:
+
+\begin{itemize}
+	\item \textbf{Texto:} Referencia a la capacidad que tiene el modelo para generar texto.
+	\item \textbf{Código:} Referencia para la capacidad de generar código.
+	\item \textbf{NLP:} Referencia sobre la capacidad de precisión en el procesamiento NLP.
+	\item \textbf{Velocidad:} Referencia hacia la velocidad de respuesta del modelo
+	\item \textbf{Sensibilidad:} Referencia a la capacidad del modelo en detectar datos de entrada sensibles.
+\end{itemize}
+
+Ademas, para simplificar la visualización de la tabla en la memoria de este trabajo, se utilizaron los siguientes símbolos para identificar las capacidades que forman parte de cada modelo:
+
+\begin{itemize}
+	\item \ding{51}: Representa que el modelo es muy adecuado para esta capacidad. 
+	\item \ding{55}: Representa que el modelo no aplica para esta capacidad.
+	\item \faMinus: Representa que el modelo tiene una capacidad moerada.
+\end{itemize}
+
+\input{tablas/tabla-modelos-ia.tex}
+
+En conclusión, teniendo en cuenta los datos analizados. El modelo que mas se ajusto para que se logren cumplir los objetivos de este trabajo fue el modelo GPT-3.5 dado que cumple con la mayor cantidad de capacidades mencionadas. Su capacidad para procesar texto natural permita generar representaciones estructuradas como el archivo JSON que necesita  la herramienta TDDT4IOTS y se encargue de graficar el diagrama de clases. En comparación con otros modelos como GPT-4, que aunque es más potente, presenta una mayor complejidad y puede ser más lento, GPT-3.5 ofrece un rendimiento robusto en tareas de generación de texto y manejo de información contextual con una velocidad más adecuada para entornos donde se necesitan respuestas rápidas y eficientes.
+
+Se decidió que GPT-3.5 era más preciso y consistente que GPT-3 en la generación de texto, lo cual resultaba crucial para el proyecto, que dependía de la correcta interpretación de las especificaciones escritas en lenguaje natural del sistema a desarrollar en forma de casos de uso extendidos para transformarlos en diagramas de clases. Aunque GPT-3 ofrecía un rendimiento aceptable, su capacidad para procesar lenguaje con alta precisión era inferior, lo que podría haber afectado la calidad de los diagramas generados. Otros modelos, como Codex, estaban más orientados a la generación de código, pero no tenían la misma capacidad en el procesamiento de lenguaje natural que GPT-3.5. Además, modelos como Robert y BERT/LSTM, aunque fuertes en la detección de datos sensibles, no eran adecuados para la creación de diagramas a partir de texto. Por estas razones, GPT-3.5 fue elegido, ya que ofrecía una mejor combinación de precisión, rapidez y capacidad de interpretación para satisfacer las necesidades del TFM.
 
 \section{Ajustes finos de modelos}   
 
@@ -104,33 +130,43 @@ El ajuste basado en instrucciones \cite{Liesenfeld2023} ajusta el modelo para se
 
  Zhang y Hu \cite{Zhang2021} proponen esta técnica permite una mayor flexibilidad y eficiencia en el ajuste fino, utilizando tanto la estructura original del modelo como redes especializadas en tareas. Este enfoque mejora el rendimiento del modelo en tareas de clasificación de texto al combinar diferentes estrategias de ajuste. Los resultados mostraron que el ajuste fino en dos etapas permitía al modelo adaptarse mejor a las características específicas de las tareas, logrando una mayor precisión y eficiencia. Este método también facilita la incorporación de nuevas características o datos en el modelo sin necesidad de un reentrenamiento completo, optimizando el tiempo y los recursos necesarios para mantener y mejorar el rendimiento del modelo.
 
+\subsection{Conclusiones}
+
 Como conclusión de esta sección podemos resaltar que estos estudios demuestran cómo diferentes tipos de ajuste fino pueden ser aplicados para optimizar modelos de lenguaje pre-entrenados en diversas tareas y dominios. Desde ajustes específicos para tareas particulares hasta enfoques generales y eficientes en parámetros, cada técnica de ajuste fino ofrece ventajas únicas que mejoran el rendimiento y la aplicabilidad de los modelos de lenguaje en múltiples contextos. Estas investigaciones no solo subrayan la importancia del ajuste fino en el desarrollo de modelos de lenguaje más precisos y eficientes, sino que también destacan las diversas estrategias que pueden ser empleadas para maximizar el potencial de estos modelos en aplicaciones prácticas. La implementación de estas técnicas de ajuste fino permite a los desarrolladores y científicos de datos adaptar modelos avanzados a necesidades específicas, mejorando la eficacia y relevancia de las soluciones basadas en inteligencia artificial en distintos sectores.
+
+La tabla \ref{tab:ajuste-fino} muestra una evaluación de los tipos de ajuste fino aplicadas a modelos de lenguaje mencionadas anteriormente, destacando características clave como la precisión, flexibilidad, velocidad, uso de recursos, y las principales aplicaciones para las cuales son más adecuadas. 
+
+Cada columna en la tabla \ref{tab:ajuste-fino} de los tipos de ajuste fino tiene un significado específico:
+
+\begin{itemize}
+	\item \textbf{Precisión: } Indica el nivel de exactitud que cada tipo de ajuste ofrece en sus resultados. 
+	\item \textbf{Flexibilidad: } Muestra la capacidad del ajuste fino de adaptarse a diferentes tareas o requisitos.
+	\item \textbf{Velocidad: }  Representa el tiempo o la eficiencia con la que se implementa el ajuste fino.
+	\item \textbf{Recursos: } Refleja los recursos computacionales necesarios para ejecutar el ajuste fino.
+	\item \textbf{Aplicación principal: } Describe las áreas donde cada técnica de ajuste fino se desempeña mejor
+\end{itemize}
 
 A continuación se explica cada símbolo utilizado en la tabla \ref{tab:ajuste-fino}:
 
 \begin{itemize}
-	\item Precisión: 
-	\begin{itemize}
-		\item El símbolo de estrella (\starL) indica el nivel de precisión de cada ajuste fino. Cinco estrellas (\starL\starL\starL\starL\starL) representan la máxima precisión.
-	\end{itemize}
-	\item Flexibilidad:
+	\item \textbf{Precisión}: El símbolo de estrella (\starL) indica el nivel de precisión de cada ajuste fino. Cinco estrellas (\starL\starL\starL\starL\starL) representan la máxima precisión. 
+	\item \textbf{Flexibilidad}:
 	\begin{itemize}
 		\item La flecha hacia abajo ($\downarrow$) indica baja flexibilidad.
 		\item La flecha hacia arriba ($\uparrow$) representa alta flexibilidad.
 		\item La flecha de doble sentido ($\leftrightarrow$) indica flexibilidad media.
 	\end{itemize}
-	\item Velocidad:
+	\item \textbf{Velocidad}:
 	\begin{itemize}
 		\item El reloj (\reloj) representa procesos lentos. Un reloj (\reloj) indica una velocidad lenta y dos relojes (\reloj\reloj) una velocidad media.
 		\item El rayo (\rayo) simboliza velocidad rápida. Dos rayos (\rayo\rayo) indican una velocidad muy rápida.
 	\end{itemize}
-	\item Recursos:
-	\begin{itemize}
-		\item El símbolo de tuerca (\monitor) indica el uso de recursos computacionales. Más tuercas (\monitor\monitor\monitor\monitor) indican un mayor uso de recursos.
-	\end{itemize}
+	\item \textbf{Recursos}: El símbolo de tuerca (\monitor) indica el uso de recursos computacionales. Más tuercas (\monitor\monitor\monitor\monitor) indican un mayor uso de recursos.
 \end{itemize}
 
 \input{tablas/tabla-ajustes-finos.tex}
+
+Finalmente, tras el análisis realizado a los tipos de ajustes finos. El mas adecuado para implementar en este trabajo fue el Ajuste fino general. Se destaca por su equilibrio entre precisión y flexibilidad, lo que lo convierte en una opción ideal para proyectos que requieren manejar múltiples tipos de datos para entrenar un modelo en especifico. El ajuste fino general cuenta con un buen rendimiento en términos de recursos computacionales. Aunque no es el más rápido de los métodos evaluados, su capacidad para gestionar un amplio rango de aplicaciones sin requerir ajustes adicionales lo hizo particularmente adecuado para el TFM, en el cual era necesario abordar una variedad de entradas textuales con diferentes niveles de complejidad.
 
 \section{Generación Automática de UML}
 
@@ -148,7 +184,40 @@ En el ámbito educativo, se ha explorado la conversión de ejercicios textuales 
 
 % \cite{Huber2022} buscar otra referencia
 
+\subsection{Conclusiones}
+
 En conclusión, los avances en la generación automática de diagramas de clases UML, impulsados por técnicas de aprendizaje automático, NLP y métodos formales, han mejorado significativamente la precisión, eficiencia y utilidad práctica de estos diagramas en el desarrollo y diseño de software. Estos desarrollos no solo reducen el esfuerzo manual sino que también aseguran una representación más coherente y precisa de los sistemas, facilitando tanto la ingeniería de requisitos como el diseño detallado de software.
+
+La tabla \ref{tab:comparacion-tecnicas} muestra una comparativa de las técnicas analizadas para la generación automática de diagramas UML. Se evaluaron diversas características clave, como el nivel de automatización, el uso de NLP, la aplicación de redes neuronales, la optimización visual de los diagramas y la facilidad de implementación de cada técnica. Esta comparación permite identificar qué métodos son más adecuados según las necesidades específicas de un proyecto, destacando aquellos que ofrecen un mayor grado de automatización y facilidad de uso. A continuación se detalla que significa cada columna de la tabla:
+
+\begin{itemize}
+	\item \textbf{Automatización}: Indica si la técnica es completamente automática o si requiere intervención manual para completar el proceso.
+	
+	\item \textbf{NLP }: Muestra si la técnica utiliza NLP para extraer información de descripciones textuales y generar los diagramas UML automáticamente.
+	
+	\item \textbf{Redes N.}: Señala si la técnica emplea redes neuronales para el análisis o generación de diagramas UML.
+	
+	\item \textbf{Óptimo}: Indica si la técnica incluye alguna forma de optimización visual para mejorar la disposición de los elementos en el diagrama, minimizando cruces y mejorando la estética general.
+	
+	\item \textbf{Implementación}: Evalúa la complejidad o facilidad con la que se puede implementar la técnica en un entorno de desarrollo. Se mide en función de qué tan fácil es su integración en herramientas o proyectos.
+\end{itemize}
+
+Para comprender los símbolos usados en la tabla se describen cada uno de ellos y que significado conlleva encontrarlos en cada una de las columnas:
+
+\begin{itemize}
+	\item \textbf{\ding{51}}: Indica que la técnica incluye esa característica (por ejemplo, es completamente automática o utiliza NLP).
+	
+	\item \textbf{\ding{55}}: Indica que la técnica no incluye esa característica (por ejemplo, no utiliza NLP o no tiene redes neuronales).
+	
+	\item \textbf{\faMinus}: Señala que la técnica requiere intervención manual o que el proceso no está completamente automatizado.
+	
+	\item \textbf{\starL}: Representa la facilidad de implementación, con más estrellas indicando una mayor facilidad de implementación. Se utiliza de una a cinco estrellas para reflejar la complejidad relativa.
+\end{itemize}
+
+La técnica que más se relaciona con este TFM es la \textbf{extracción de diagramas a partir de texto utilizando NLP}, ya que es automática y emplea el NLP para generar diagramas UML directamente desde descripciones textuales, como los casos de uso extendidos. Este enfoque coincide con el objetivo de este trabajo, que utiliza técnicas de NLP para analizar las descripciones del sistema y crear automáticamente diagramas de clases, facilitando así el desarrollo de sistemas IoT.
+
+
+\input{tablas/tabla-tecnicas-uml.tex}
 
 \section{IA en la ingeniería de software}
 
@@ -168,36 +237,62 @@ La combinación de simulación y algoritmos de búsqueda IA puede proporcionar e
 
 \subsection{Optimización y portabilidad de modelos de IA/ML}
 
-Se abordan los desafíos y técnicas para portar modelos de inteligencia artificial y aprendizaje automático a unidades de procesamiento de inteligencia (IPUs). La optimización de modelos AI/ML para hardware especializado, como las IPUs, puede mejorar significativamente la eficiencia y velocidad de procesamiento. El trabajo presenta un análisis detallado de las adaptaciones necesarias para aprovechar al máximo las capacidades de las IPUs, que son cruciales para aplicaciones que requieren procesamiento intensivo de datos y en tiempo real \cite{Nasari2023}.
+Se abordan los desafíos y técnicas para portar modelos de IA y aprendizaje automático \textit{(ML - Machine Learning)} a unidades de procesamiento de inteligencia (IPUs). La optimización de modelos IA/ML para hardware especializado, como las IPUs, puede mejorar significativamente la eficiencia y velocidad de procesamiento. El trabajo presenta un análisis detallado de las adaptaciones necesarias para aprovechar al máximo las capacidades de las IPUs, que son cruciales para aplicaciones que requieren procesamiento intensivo de datos y en tiempo real \cite{Nasari2023}.
 
-La importancia de ajustar y optimizar los modelos AI/ML para diferentes arquitecturas de hardware para maximizar el rendimiento y la eficiencia en diversas aplicaciones industriales y de investigación es esencial. Esto implica no solo la reimplementación de algoritmos en un nuevo entorno de hardware, sino también la reconsideración de los parámetros y configuraciones del modelo para alinearse con las capacidades específicas de las IPUs. Este enfoque es crucial para mantener la competitividad en un campo en rápida evolución como el de la inteligencia artificial y el aprendizaje automático \cite{Nasari2023}.
+La importancia de ajustar y optimizar los modelos IA/ML para diferentes arquitecturas de hardware para maximizar el rendimiento y la eficiencia en diversas aplicaciones industriales y de investigación es esencial. Esto implica no solo la reimplementación de algoritmos en un nuevo entorno de hardware, sino también la reconsideración de los parámetros y configuraciones del modelo para alinearse con las capacidades específicas de las IPUs. Este enfoque es crucial para mantener la competitividad en un campo en rápida evolución como el de la IA y el aprendizaje automático o ML \cite{Nasari2023}.
 
-\subsection{Educación en Ingeniería de Software con IA Generativa}
+\subsection{Educación en ingeniería de software con IA generativa}
 
 Se presenta un estudio sobre la incorporación de ChatGPT en programas de aprendizaje de ingeniería de software. Se asignaron tareas a estudiantes de diferentes niveles de experiencia para utilizar ChatGPT en la resolución de problemas de programación. Los resultados mostraron que los programadores novatos encontraron muy útil la generación de código por parte de ChatGPT, ya que les proporcionaba soluciones rápidas y funcionales. Sin embargo, los programadores más experimentados, aunque reconocieron la utilidad de la herramienta, señalaron que el código generado a menudo requería modificaciones para cumplir con estándares de calidad y prácticas comunes en programación \cite{Petrovska2023}.
 
 Las encuestas realizadas a los estudiantes y sus empleadores revelaron una actitud positiva hacia la integración de IA generativa en el currículo educativo, siempre que se utilice como una herramienta de apoyo y no como un sustituto del aprendizaje profundo de los principios de programación. Este estudio destaca la necesidad de una integración equilibrada de herramientas de IA en la educación, asegurando que los estudiantes desarrollen una comprensión sólida de los conceptos fundamentales mientras se benefician de las ventajas que ofrece la tecnología AI \cite{Petrovska2023}.
 
-\subsection{Mapeo Sistemático de Técnicas de IA en Ingeniería de Software}
+\subsection{Mapeo sistemático de técnicas de IA en ingeniería de software}
 
-Un mapeo sistemático de las técnicas de inteligencia artificial aplicadas en la ingeniería de software identifica áreas clave de impacto y desarrollo. Se examina cómo la IA ha influido en la gestión de proyectos, la automatización de pruebas y la mejora de la calidad del software. El estudio proporciona una visión general comprensiva del estado del arte, destacando las tendencias actuales y los desafíos futuros en la implementación de tecnologías de IA en el ciclo de vida del software \cite{Sofian2022}.
+Un mapeo sistemático de las técnicas de IA aplicadas en la ingeniería de software identifica áreas clave de impacto y desarrollo. Se examina cómo la IA ha influido en la gestión de proyectos, la automatización de pruebas y la mejora de la calidad del software. El estudio proporciona una visión general comprensiva del estado del arte, destacando las tendencias actuales y los desafíos futuros en la implementación de tecnologías de IA en el ciclo de vida del software \cite{Sofian2022}.
 
 El mapeo sistemático revela que la integración de la IA no solo mejora la eficiencia y precisión en el desarrollo de software, sino que también abre nuevas oportunidades para innovar y optimizar procesos tradicionales. Las técnicas de IA, como el aprendizaje automático y el procesamiento de lenguaje natural, están siendo cada vez más adoptadas para resolver problemas complejos en la ingeniería de software, proporcionando soluciones avanzadas y eficaces que transforman la manera en que se diseñan, desarrollan y mantienen los sistemas de software \cite{Sofian2022}.
 
-\subsection{Pruebas de Calidad para Software con IA}
+\subsection{Pruebas de calidad para software con IA}
 
 Se exploran los desafíos y prácticas en la validación y pruebas de software que incorpora componentes de IA. Las dificultades en asegurar la calidad y confiabilidad de software impulsado por IA se deben a la naturaleza dinámica e impredecible de los modelos de IA. Se proponen metodologías y prácticas para mejorar las pruebas y la validación, asegurando que los sistemas de software con IA sean robustos y confiables antes de su despliegue \cite{Tao2019}.
 
 Este trabajo es esencial para desarrollar marcos de prueba que puedan manejar la complejidad y variabilidad inherentes a los sistemas de IA. Se abordan estrategias para identificar y mitigar riesgos potenciales, asegurando que los modelos de IA funcionen correctamente bajo diversas condiciones operativas. Este enfoque es crucial para garantizar que los sistemas de software con IA cumplan con los estándares de calidad necesarios para aplicaciones críticas, reduciendo el riesgo de fallos y aumentando la confianza en el uso de tecnologías de IA en entornos sensibles \cite{Tao2019}.
 
-\subsection{Análisis de Estructura y Distribución de Fallos en Redes de Software}
+\subsection{Análisis de estructura y distribución de fallos en redes de software}
 
-Un modelo de red de software se presenta para analizar la estructura del software y la distribución de fallos. Utilizando técnicas de modelado de redes, se proporcionan insights sobre cómo se distribuyen los fallos dentro de la estructura del software, identificando patrones y áreas críticas que requieren atención. Este enfoque permite mejorar la calidad y mantenibilidad del software al facilitar una gestión más eficaz de los recursos de desarrollo y mantenimiento \cite{Ai2019}.
+Un modelo de red de software se presenta para analizar la estructura del software y la distribución de fallos. Utilizando técnicas de modelado de redes, se proporcionan ideas o \textit{insights} sobre cómo se distribuyen los fallos dentro de la estructura del software, identificando patrones y áreas críticas que requieren atención. Este enfoque permite mejorar la calidad y mantenibilidad del software al facilitar una gestión más eficaz de los recursos de desarrollo y mantenimiento \cite{Ai2019}.
 
 La investigación subraya la importancia de entender la topología del software para identificar y mitigar proactivamente las áreas propensas a fallos. Al analizar la red de software, se pueden detectar componentes vulnerables y optimizar el diseño para aumentar la robustez y confiabilidad del software. Este enfoque es esencial para desarrollar sistemas de software más resilientes y reducir el riesgo de fallos, mejorando así la calidad general y la eficiencia del desarrollo de software \cite{Ai2019}.
 
 \subsection{Desarrollo de Nuevos Productos con IA}
 
-La inteligencia artificial está transformando el desarrollo de nuevos productos, destacando su uso para acelerar el ciclo de desarrollo, mejorar la toma de decisiones y personalizar productos según las preferencias del cliente. La IA permite a las empresas responder más rápidamente a las demandas del mercado, innovar con mayor eficiencia y reducir los costos asociados con el desarrollo de productos \cite{Cooper2024}.
+La IA está transformando el desarrollo de nuevos productos, destacando su uso para acelerar el ciclo de desarrollo, mejorar la toma de decisiones y personalizar productos según las preferencias del cliente. La IA permite a las empresas responder más rápidamente a las demandas del mercado, innovar con mayor eficiencia y reducir los costos asociados con el desarrollo de productos \cite{Cooper2024}.
 
 La capacidad de la IA para revolucionar el proceso de desarrollo de productos la convierte en un motor clave para la innovación y la competitividad en el mercado global. La implementación de técnicas de IA en el desarrollo de productos permite una mayor agilidad y adaptabilidad, lo que es crucial para mantener la relevancia en un entorno empresarial en rápida evolución. Este estudio subraya la importancia de integrar la IA en las estrategias de desarrollo de productos para aprovechar sus ventajas y mantenerse a la vanguardia en la industria \cite{Cooper2024}.
+
+\section{Conclusiones}
+
+La tabla \ref{tab:comparativa-IA-ingenieria} las principales técnicas de IA en ingeniería de software previamente explicadas. Esta tabla tiene como objetivo comparar las técnicas en función de su nivel de automatización, su impacto en la calidad del software y su idoneidad para su uso en proyectos de gran escala.
+
+Para comprender el concepto de cada columna se define en la siguiente lista, ademas del significado de cada símbolo en las columnas respectivas:
+
+\begin{itemize}
+	\item \textbf{Automatización}: Evalúa si la técnica es completamente automática o si requiere intervención manual en alguna parte del proceso.
+	\item \textbf{Impacto en Calidad}: Indica si la técnica mejora significativamente la calidad del software.
+	\item \textbf{Uso en Proyectos Grandes}: Refleja la adecuación de la técnica para su aplicación en proyectos de gran escala, donde es necesario manejar un mayor volumen de datos.
+\end{itemize}
+
+\textbf{Significado de los símbolos:}
+
+\begin{itemize}
+	\item \ding{51}: Indica que la técnica incluye completamente esa característica (por ejemplo, automatización completa o impacto positivo en calidad).
+	\item \faMinus: Señala que la técnica es parcialmente automática o tiene un impacto parcial, requiriendo intervención manual o siendo menos efectiva en proyectos de gran escala.
+	\item \ding{55}: Indica que la técnica no incluye esa característica o no es adecuada para esa evaluación.
+	\item \ding{72}: Estrella que indica el grado de idoneidad para su uso en proyectos grandes. Más estrellas significan una mayor idoneidad para proyectos de mayor escala y complejidad (de 1 a 5 estrellas).
+\end{itemize}
+
+Aunque la técnica de \textbf{generación automática de código} se asocia principalmente con la creación de código fuente, su aplicación se extiende al ámbito de la generación automática de diagramas UML. En el contexto de este TFM, esta técnica resulta especialmente útil porque puede interpretar descripciones textuales de los requisitos del sistema y generar estructuras que luego pueden interpretarse en diagramas UML de manera. Esta capacidad para automatizar la creación de modelos de clases a partir de descripciones de alto nivel es crucial para sistemas IoT, donde se necesita una representación visual de los componentes y sus interacciones, facilitando así el desarrollo del sistema.
+
+
+\input{tablas/tabla-ia-ingsoftware.tex}
