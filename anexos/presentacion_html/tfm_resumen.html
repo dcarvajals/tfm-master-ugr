@@ -1,0 +1,132 @@
+<html>
+	<head>
+		<style type="text/css">
+			/* Fondo claro pero no blanco */
+			body {
+				background-color: #f5f5f5;
+				color: #2e2e2e;
+				font-family: "Courier New", Courier, monospace;
+				margin: 0;
+				padding: 0;
+			}
+
+			/* Contenedor principal */
+			#pagina {
+				width: 60%;
+				margin: 50px auto;
+				background-color: #ffffff;
+				box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+				padding: 20px;
+				border-radius: 8px;
+			}
+
+			/* Título del TFM */
+			#titulo_pagina {
+				background-color: #222831;
+				color: #ffffff;
+				padding: 10px;
+				border-radius: 5px;
+				text-align: center;
+				font-size: 2em;
+			}
+
+			/* Subtítulos */
+			h2 {
+				color: #30475e;
+				font-size: 1.5em;
+				margin-bottom: 10px;
+				border-bottom: 2px solid #30475e;
+				padding-bottom: 5px;
+			}
+
+			/* Estilo de lista */
+			ul {
+				list-style-type: none;
+				padding: 0;
+			}
+
+			li.level1 {
+				margin: 10px 0;
+			}
+
+			.li {
+				background-color: #eeeeee;
+				padding: 10px;
+				border-radius: 5px;
+				box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+			}
+
+			/* Estilo para énfasis como cursivas y negritas */
+			.italic {
+				font-style: italic;
+			}
+			.bold {
+				font-weight: bold;
+			}
+
+			/* Resumen y demás textos */
+			p {
+				line-height: 1.5;
+				color: #4e4e4e;
+			}
+
+			/* Imagen */
+			img {
+				max-width: 100%;
+				height: auto;
+				border-radius: 5px;
+				width: 250px;
+			}
+
+			/* Para darle un efecto tipo terminal */
+			::selection {
+				background-color: #d3e0ea;
+				color: #222831;
+			}
+		</style>
+		<title>Desarrollo del Software &gt; Trabajo Fin de Máster | Universidad de Granada</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="description" content="Universidad de Granada - Desarrollo del Software - ">
+		<meta name="keywords" content="universidad,granada,Desarrollo del Software - ">
+		<meta http-equiv="content-language" name="language" content="es">
+		<link rel="shortcut icon" href="http://masteres.ugr.es/master-desarrollo-software/img/favicon.ico" type="image/vnd.microsoft.icon">
+	</head>
+	<body>
+		<div id="pagina">
+			<h1 id="titulo_pagina"><span class="texto_titulo">Trabajo Fin de Máster</span></h1>
+			<div id="contenido" class="sec_interior">
+				<div class="content_doku">
+					<h2>Extensión de herramienta CASE para el desarrollo de sistemas IoT</h2>
+					<h3> Interpretación inteligente de casos de uso </h3>
+					<ul>
+						<li class="level1"><div class="li"><strong>Autor:</strong> Dúval Carvajal Suárez</div></li>
+						<li class="level1"><div class="li"><strong>Tutor/es:</strong> Miguel J. Hornos Barranco, Carlos Rodríguez Domínguez</div></li>
+						<li class="level1"><div class="li"><strong>Fecha de Lectura:</strong> 19/09/2024</div></li>
+						<li class="level1">
+							<div class="li"><strong>Resumen: </strong> 
+								<p>El desarrollo de Sistemas basados en Internet de las Cosas IoT (<span class="italic">Internet Of Things</span>) va aumentando 
+									conforme va pasando el tiempo y su trabajo tiene complicaciones al momento de concretar la idea central del proyecto. Como 
+									todo Sistema de software debe tener un análisis técnico previo al desarrollo físico del proyecto, los desarrolladores tienden 
+									a debatir sobre la creación de diagramas técnicos que permiten a todo el equipo entender el funcionamiento completo del sistema. 
+									Existe una herramienta CASE denominada TDDT4IoTS (<span class="italic">Test-Driven Development Tool for IoT-based Systems</span>), 
+									la cual fue mejorada extendiendo su funcionalidad dotándola de mayor inteligencia para desarrollar sistemas IoT. La entrada 
+									principal de información por parte de la herramienta son las descripciones del sistema a desarrollar especificadas por los 
+									desarrolladores en forma de casos de uso extendidos. Utilizando la API de OpenAI se implementaron las técnicas que brindan sus 
+									modelos para analizar estas descripciones e identificarán automáticamente los elementos clave (posibles clases, atributos, 
+									relaciones, etc.) que se deben considerar para generar, también de manera automática, un diagrama de clases conceptual, que luego 
+									podría refinarse para obtener un diagrama de clases del dominio del diseño de la solución. Además, se logró implementar el ajuste 
+									fino de forma que los usuarios, mediante la herramienta, tengan la opción de poder indicarle las instrucciones necesarias al 
+									modelo que más les interese para mejorar el desarrollo del sistema IoT.</p>
+							</div>
+						</li>
+						<li class="level1">
+							<div class="li" style="text-align: center;"><strong>Imagen:</strong> 
+								<p><img src="http://82.180.136.74/storageTddm4IoTbs/UserImage/logoExtensiontfm.png" alt="Imagen" /></p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

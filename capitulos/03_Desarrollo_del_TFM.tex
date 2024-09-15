@@ -1,4 +1,4 @@
-\chapter{Desarrollo del TFM}\label{chapter:desarrollo}
+\chapter{Desarrollo de la extensión de la herramienta}\label{chapter:desarrollo}
 
 \section{Análisis de requisitos}
 
@@ -43,8 +43,8 @@ Las restricciones del proyecto son los factores que limitan las opciones de dise
 	\item \textbf{Dependencia de servicios de IA:}
 	La solución depende del uso de la API de servicios de OpenAI, lo cual implica un costo asociado y posibles limitaciones en la disponibilidad del servicio. Es crucial gestionar adecuadamente los costos y tener planes de contingencia para posibles interrupciones del servicio.
 	
-	\item \textbf{Licencias de software open source:}
-	Todo el software open source utilizado debe cumplir con sus respectivas licencias, asegurando que no se infrinjan derechos de propiedad intelectual. Es importante revisar y entender las condiciones de cada licencia para evitar problemas legales.
+	\item \textbf{Licencias de software \textit{open source}:}
+	Todo el software \textit{open source} utilizado debe cumplir con sus respectivas licencias, asegurando que no se infrinjan derechos de propiedad intelectual. Es importante revisar y entender las condiciones de cada licencia para evitar problemas legales.
 	
 	\item \textbf{Integración con sistemas existentes:}
 	La herramienta implementada debe integrarse sin problemas con la herramienta TDDT4IoTS existente y otros sistemas de apoyo. Esto puede requerir adaptaciones específicas para asegurar la compatibilidad y un funcionamiento fluido entre los diferentes componentes del sistema resultante.
@@ -75,14 +75,14 @@ Los recursos utilizados para el desarrollo del proyecto incluyen tanto herramien
 
 La arquitectura del sistema desarrollado para la extensión de la herramienta TDDT4IoTS está diseñada para ser modular, escalable y fácil de mantener. Esta arquitectura se compone de varias capas, cada una con responsabilidades específicas, lo que permite una clara separación de preocupaciones y facilita tanto el desarrollo como la integración de nuevas funcionalidades. La estructura en capas asegura que cada componente del sistema pueda evolucionar independientemente, mejorando la robustez y la flexibilidad del mismo.
 
-La figura \ref{fig:cap3_arquitectura} presenta las tecnologías utilizadas en las diferentes capas que componen la arquitectura del sistema: la capa del cliente, la capa de conexión, la capa de negocio, la capa de la nube y la capa de datos, describiéndose cada una de ellas en los siguientes subapartados que se incluyen a continuación. Cada una de estas capas juega un papel importante en el funcionamiento del sistema, asegurando que las interacciones entre los usuarios y las funcionalidades avanzadas basadas en inteligencia artificial se realicen de manera eficiente y segura. Esta organización en capas también facilita la gestión de la lógica del negocio, el almacenamiento de datos y la comunicación entre los diferentes servicios que forman parte de la solución.
-
 \begin{figure}[H]  
 	\centering
-	\includegraphics[width=\textwidth]{cap3_arquitectura.png}
+	\includegraphics[width=300px]{cap3_arquitectura.png}
 	\caption{Arquitectura de la extensión.}
 	\label{fig:cap3_arquitectura}
 \end{figure}
+
+La figura \ref{fig:cap3_arquitectura} presenta las tecnologías utilizadas en las diferentes capas que componen la arquitectura del sistema: la capa del cliente, la capa de conexión, la capa de negocio, la capa de la nube y la capa de datos, describiéndose cada una de ellas en los siguientes subapartados que se incluyen a continuación. Cada una de estas capas juega un papel importante en el funcionamiento del sistema, asegurando que las interacciones entre los usuarios y las funcionalidades avanzadas basadas en inteligencia artificial se realicen de manera eficiente y segura. Esta organización en capas también facilita la gestión de la lógica del negocio, el almacenamiento de datos y la comunicación entre los diferentes servicios que forman parte de la solución.
 
 
 \subsection{Capa del cliente}
@@ -99,8 +99,8 @@ La capa del cliente es la interfaz donde los usuarios interactúan directamente 
 La capa de conexión se encarga de manejar las comunicaciones entre los diferentes componentes del sistema. Esta capa es crucial para garantizar que los datos fluyan de manera eficiente y segura entre las diferentes partes del sistema.
 
 \begin{itemize}
-	\item \textbf{Conexión HTTPS:} Utilizada para la comunicación entre el cliente y los microservicios \textit{backend}. Las peticiones HTTPS son manejadas por el \textit{framework} Spring, que gestiona la validación de las solicitudes y la entrega de respuestas adecuadas.
-	\item \textbf{Conexión gRPC:} Establecida entre los microservicios de Spring y el componente de Python que maneja la integración con los modelos de inteligencia artificial. gRPC proporciona una comunicación rápida y eficiente, esencial para el procesamiento intensivo de datos requerido por los modelos de IA.
+	\item \textbf{Conexión HTTPS:} Utilizada para la comunicación entre el cliente y la capa de negocio. Las peticiones HTTPS son manejadas por el \textit{framework} Spring, que gestiona la validación de las solicitudes y la entrega de respuestas adecuadas.
+	\item \textbf{Conexión gRPC:} Establece la conexión entre los microservicios implementados con Spring y Python que se encuentran en la capa de negocio, y que manejan la integración con los modelos de IA. gRPC proporciona una comunicación rápida y eficiente, esencial para el procesamiento intensivo de datos requerido por los modelos de IA.
 \end{itemize}
 
 \subsection{Capa de negocio}
@@ -108,7 +108,7 @@ La capa de conexión se encarga de manejar las comunicaciones entre los diferent
 La capa de negocio alberga todos los microservicios implementados que contienen la lógica del negocio necesaria para manejar el uso de los modelos de inteligencia artificial y el entrenamiento de los mismos. Esta capa es el núcleo funcional de la aplicación, donde se llevan a cabo las principales operaciones.
 
 \begin{itemize}
-	\item \textbf{Microservicios:} Desarrollados con Spring Boot, estos servicios incluyen funcionalidades como la gestión de usuarios, el procesamiento de descripciones de casos de uso, y la generación de diagramas de clases.
+	\item \textbf{Microservicios:} Para el control de todas las peticiones que son enviadas por el cliente se desarrollaron los microservicios con Spring Boot. Python fue implementado de forma interna para controlar las peticiones que se realizarían con la API de OpenAI, comunicándose igualmente mediante gRPC con los microservicios de Spring Boot. Finalmente Node.js fue implementado para tener a disponibilidad como un servicio web, el interprete del lenguaje de símbolos que cuenta la herramienta TDDT4IoTS, también mantiene una comunicación interna con los microservicios de Spring Boot.
 	\item \textbf{Lógica de negocio:} Cada microservicio está diseñado para realizar tareas específicas, como la validación de peticiones, el análisis de texto utilizando modelos de IA, y la generación y refinamiento de diagramas de clases conceptuales.
 \end{itemize}
 
@@ -117,7 +117,7 @@ La capa de negocio alberga todos los microservicios implementados que contienen 
 La capa de la nube se refiere al uso de servicios externos, en este caso, los modelos de OpenAI. Esta capa proporciona las capacidades de inteligencia artificial necesarias para analizar las descripciones de los casos de uso y generar estructuras JSON que representen diagramas de clases.
 
 \begin{itemize}
-	\item \textbf{Modelos de IA:} Utilización de modelos de inteligencia artificial para procesar texto y extraer información relevante. Los modelos pueden ser seleccionados y configurados según las necesidades del desarrollador.
+	\item \textbf{Modelos de IA:} Se utilizó el modelo base \textit{GPT-3.5} de OpenAI para procesar texto y extraer información relevante. Los modelos pueden ser seleccionados y configurados según las necesidades del desarrollador.
 	\item \textbf{API de OpenAI:} La integración con la API de OpenAI permite el acceso a potentes modelos de IA que facilitan el análisis y procesamiento de las descripciones textuales, optimizando el proceso de diseño de sistemas.
 \end{itemize}
 
@@ -127,18 +127,18 @@ La capa de datos es responsable de almacenar toda la información relevante gene
 
 \begin{itemize}
 	\item \textbf{Base de datos PostgreSQL:} Utilizada para almacenar descripciones textuales, estructuras JSON generadas, diagramas de clases y cualquier otro dato relevante. PostgreSQL es una base de datos relacional robusta y escalable, adecuada para aplicaciones de misión crítica.
-	\item \textbf{Almacenamiento de modelos:} Los datos relacionados con los modelos de IA, incluyendo los resultados del entrenamiento y las configuraciones utilizadas, son almacenados de manera segura en tablas relacionales dentro de la base de datos de la herramienta TDDT4IOTS para asegurar su disponibilidad y fácil acceso cuando sea necesario.
+	\item \textbf{Almacenamiento de modelos:} Los datos relacionados con los modelos de IA, incluyendo los resultados del entrenamiento y las configuraciones utilizadas, son almacenados de manera segura en tablas relacionales dentro de la base de datos de la herramienta TDDT4IoTS para asegurar su disponibilidad y fácil acceso cuando sea necesario.
 \end{itemize}
 
 \section{Desarrollo e Implementación}
 
-El desarrollo e implementación de la extensión de la herramienta TDDT4IoTS se llevó a cabo a través de una serie de fases bien definidas, cada una de las cuales fue importante para cumplir con el objetivo principal del proyecto. Este enfoque estructurado permitió un desarrollo iterativo, asegurando que cada componente del sistema fuera desarrollado y probado de manera correcta antes de proceder a la siguiente iteración. El proceso de desarrollo consiste en los siguientes pasos, realizados de manera reiterativa hasta alcanzar los objetivos planteados: análisis detallado de los requisitos, seguido por el diseño de la extensión, la configuración de los frameworks necesarios, el desarrollo de los componentes y, finalmente, la integración de estos componentes en un sistema funcional. En la figura \ref{fig:cap3_fases_desarrollo} se presenta gráficamente el enfoque metodológico seguido en cada iteración del proceso completo de desarrollo.
+El desarrollo e implementación de la extensión de la herramienta TDDT4IoTS se llevó a cabo a través de una serie de fases bien definidas, cada una de las cuales fue importante para cumplir con el objetivo principal del proyecto. Este enfoque estructurado permitió un desarrollo iterativo, asegurando que cada componente del sistema fuera desarrollado y probado de manera correcta antes de proceder a la siguiente iteración. El proceso de desarrollo consiste en los siguientes pasos, realizados de manera reiterativa hasta alcanzar los objetivos planteados: análisis detallado de los requisitos, seguido por el diseño de la extensión, la configuración de los frameworks necesarios y finalmente, el desarrollo de los componentes en un sistema funcional. En la figura \ref{fig:cap3_fases_desarrollo} se presenta gráficamente el enfoque metodológico seguido en cada iteración del proceso completo de desarrollo.
 
-En la primera fase, se realizó un análisis de los requisitos para definir las funcionalidades y características necesarias. En la segunda fase, se diseñaron los componentes de la extensión basándose en los requisitos definidos. La tercera fase implicó la configuración de los frameworks y herramientas que soportarían el desarrollo, mientras que en la cuarta fase se desarrollaron los componentes individuales. Finalmente, en la quinta fase, se llevó a cabo la integración de todos los componentes desarrollados, asegurando que funcionaran conjuntamente.
+En la primera fase, se realizó un análisis de los requisitos para definir las funcionalidades y características necesarias. En la segunda fase, se diseñaron los componentes de la extensión basándose en los requisitos definidos. La tercera fase implicó la configuración de los frameworks y herramientas que soportarían el desarrollo, mientras que en la cuarta y ultima fase se desarrollaron los componentes individuales que conllevo a la integración de todos los componentes desarrollados, asegurando que funcionaran conjuntamente.
 
 \begin{figure}[H]  
 	\centering
-	\includegraphics[width=\textwidth]{cap3_fases_desarrollo.png}
+	\includegraphics[width=310px]{cap3_fases_desarrollo.png}
 	\caption{Fases de Desarrollo.}
 	\label{fig:cap3_fases_desarrollo}
 \end{figure}
@@ -146,14 +146,51 @@ En la primera fase, se realizó un análisis de los requisitos para definir las 
 
 \subsection{Fase 1: Análisis de requerimientos}
 
-Para llevar a cabo la ejecución correcta de los requisitos funcionales de la extensión, fue necesario utiliza una serie de tecnologías útiles para cumplir con el objetivo principal del trabajo. A continuación se detallan las tecnologías y software utilizados para el desarrollo e implementación del proyecto.
+En esta fase, se han definido los requisitos funcionales y no funcionales que guiarán la extensión de la herramienta TDDT4IoTS, asegurando que cumpla con las necesidades específicas de los ingenieros de software que utilizan el sistema para analizar descripciones de casos de uso en entornos IoT.
 
-\subsubsection{Tecnologías}
+\subsubsection{Identificación de usuarios y casos de uso}
+
+La extensión puede funcionar exitosamente con la manipulación de dos tipos de perfiles de usuario, el desarrollador (ingenieros de software) y un administrador. A continuación se describen cada uno de los perfiles y como utilizan la extensión mediante la herramienta TDDT4IoTS:
+
+\begin{itemize}
+	\item \textbf{Desarrollador:} Es el usuario encargado de ingresar los datos de entrada mediante las descripciones del sistema IoT a desarrollar en forma de casos de uso extendidos. Mediante la herramienta podra transformar estas descripciones en un diagramas de clases y poder validar la arquitectura previa del sistema IoT. Además, sera el encargado de seleccionar el modelo de OpenAI que crea conveniente a utilizar.
+	
+	\item \textbf{Administrador:} Tendrá la posibilidad de registrar los modelos base de OpenAI y tener el privilegio de entrenar modelos, claramente deberá tener conocimiento sobre los modelos base que permitan realizar un ajuste fino, debido a que la herramienta necesita estos modelos para poder realizar los debidos entrenamientos y se puedan utilizar los modelos entrenados en los desarrollos de los sistemas IoT ingresados en la herramienta. 
+\end{itemize}
+
+Los casos de uso que se describen a continuación son las interacciones directas entre los perfiles de usuarios y la extensión. Cada caso de uso corresponde a una funcionalidad clave que la extensión debe proporcionar a los usuarios.
+
+\begin{itemize}
+	\item \textbf{Crear/Editar casos de uso:} El desarrollador puede crear o editar descripciones detalladas de casos de uso para sistemas IoT, introduciendo los actores y componentes involucrados. El sistema valida y almacena esta información.
+	
+	\item \textbf{Generar automáticamente el diagrama de clases:} A partir de las descripciones ingresadas, la extensión genera automáticamente un diagrama de clases conceptual utilizando el modelo base \textit{GPT-3.5} de OpenAI, que luego es almacenado y presentado gráficamente.
+	
+	\item \textbf{Entrenar modelos:} El usuario administrador tendrá el privilegio de poder entrenar los modelos que se crean necesarios y aporten un mejor funcionamiento a la herramienta mediante la extensión. 
+	
+	\item \textbf{Editar diagrama de clases generado:} Una vez generado el diagrama de clases completamente, el desarrollador podrá modificar el diagrama según las necesidades que crea conveniente. Los cambios realizados se guardaran dentro de la herramienta para futuras revisiones. 
+\end{itemize}
+
+La figura \ref{fig:cap3_diagramacasodeuso} muestra el diagrama de casos de uso identificado para comprender mejor el funcionamiento de la extensión sobre la herramienta. Permite identificar los actores principales y los casos de uso previamente mencionados. 
+
+\begin{figure}[H]  
+	\centering
+	\includegraphics[width=350px]{diagramaCasosdeUso.png}
+	\caption{Diagrama de casos de uso de la extensión.}
+	\label{fig:cap3_diagramacasodeuso}
+\end{figure}
+
+\subsection{Fase 2: Diseño de la extensión}
+
+En esta fase se explicará detalladamente el comportamiento de cada proceso necesario para que la extensión de la herramienta funcione correctamente. Se dedicó tiempo a analizar cuál sería la mejor forma de adaptar la nueva funcionalidad a la herramienta sin afectar los componentes existentes.
+
+\subsubsection{Diseño de la arquitectura}
+
+En esta subsección se explicara a detalle que tecnologías fueron necesarias implementar en cada capa y para que se utilizaron dichas tecnologías para lograr con el objetivo general y específicos del proyecto. 
 
 \textbf{Capa del cliente}
 
 \begin{itemize}
-	\item \textbf{AngularJS:} Para mantener el correcto funcionamiento de la herramienta TDDT4IOTS, se decidió continuar utilizando este framework para generar las nuevas interfaces web. Esto permite que los usuarios perciban y usen la herramienta de la misma manera que lo hacían anteriormente.
+	\item \textbf{AngularJS:} Para mantener el correcto funcionamiento de la herramienta TDDT4IoTS, se decidió continuar utilizando este framework para generar las nuevas interfaces web. Esto permite que los usuarios perciban y usen la herramienta de la misma manera que lo hacían anteriormente.
 \end{itemize}
 
 \textbf{Capa de conexión}
@@ -188,39 +225,24 @@ Para llevar a cabo la ejecución correcta de los requisitos funcionales de la ex
 	\item \textbf{PostgreSQL:} La comunicación con la API de OpenAI permite utilizar los recursos alojados en sus servidores, lo cual ofrece la ventaja de no necesitar recursos locales para implementar modelos de inteligencia artificial desde cero. Al aprovechar los recursos de OpenAI, los datos entrenados se almacenan por cuenta de usuario registrada en sus servicios. Además, es importante destacar que algunos datos también se almacenan localmente para mejorar la eficiencia y disponibilidad. Esta combinación de almacenamiento en la nube y local asegura un rendimiento óptimo y una gestión eficiente de los datos.
 \end{itemize}
 
+\subsubsection{Diseño de los componentes creados}
 
-\subsubsection{Herramientas de soporte al desarrollo de software}
+En la figura \ref{fig:cap3_integracion_componentes} se puede visualizar la comunicación entre todos los componentes que controlan el correcto funcionamiento de la extensión. El funcionamiento de los componentes es del a siguiente manera:
 
-Durante el desarrollo de nuestro proyecto, se utilizaron diversas herramientas de software proporcionadas por JetBrains (\url{https://www.jetbrains.com}) para maximizar la eficiencia y productividad. JetBrains ofrece un conjunto robusto de entornos de desarrollo integrado (IDE) que se adaptan a diversas necesidades y lenguajes de programación. El uso de estas herramientas avanzadas nos permitió abordar diversas fases del desarrollo con mayor eficiencia y precisión. Las herramientas utilizadas y su aportación al desarrollo del software realizado se describen a continuación.
+\begin{enumerate}
+	\item \textbf{db-repository-tddt4iots:} Contiene todos los objetos necesarios para acceder a los datos de forma óptima.
+	\item \textbf{ms-core-tddt4iots:} Mantiene separados los recursos reutilizables por toda la extensión, además de contener los DTO necesarios para las peticiones entre el cliente y el servidor.
+	\item \textbf{ms-core-tddt4iots-openai:} Es el componente principal del proyecto, consumiendo los recursos de los componentes mencionados anteriormente, utilizados como dependencias mediante Maven.
+	\item \textbf{ms\_core\_tddt4iots\_py:} Establece la comunicación con OpenAI y configura lo necesario para realizar entrenamientos e implementar los modelos.
+	\item \textbf{armadillo-api:} API RestFul que interpreta casos de uso redactados en lenguaje de símbolos para obtener texto en lenguaje natural y crear archivos de entrenamiento.
+\end{enumerate}
 
-\textbf{IntelliJ IDEA}
-
-Para el desarrollo en Java, utilizamos \textbf{\textit{IntelliJ IDEA 2024.1.4}}, que proporcionó un entorno robusto y eficiente. Este IDE fue fundamental para la integración de Spring Framework y la gestión de microservicios, permitiéndonos escribir, probar y depurar código de manera efectiva. Las características avanzadas de IntelliJ, como la autocompletación inteligente, el análisis de código en tiempo real y las herramientas de refactorización, mejoraron significativamente nuestra productividad y calidad del código.
-
-\textbf{WebStorm}
-
-En el desarrollo de interfaces web, \textbf{\textit{WebStorm 2023.3.1}} fue la herramienta elegida por su capacidad para manejar tecnologías modernas como AngularJS. WebStorm facilitó la creación de interfaces web responsivas y dinámicas, proporcionando un entorno de desarrollo con soporte completo para JavaScript, TypeScript, HTML y CSS. Las capacidades de depuración en vivo y las herramientas de desarrollo front-end de WebStorm nos permitieron iterar rápidamente y mantener un alto estándar de calidad en nuestras interfaces de usuario.
-
-\textbf{PyCharm}
-
-Para los scripts en Python que gestionan la comunicación con la API de OpenAI, utilizamos \textbf{\textit{PyCharm 2023.3.4}}. Este IDE es reconocido por su excelente soporte para el desarrollo en Python, especialmente en proyectos de inteligencia artificial y análisis de datos. PyCharm proporcionó herramientas integradas para la gestión de entornos virtuales, el análisis de código y la depuración, lo que facilitó la implementación de soluciones robustas y eficientes para la comunicación con OpenAI.
-
-\textbf{DataGrip}
-
-La gestión de bases de datos fue mejorada significativamente mediante el uso de \textbf{\textit{DataGrip 2023.2.3}}. Esta herramienta nos permitió realizar un análisis eficiente y una integración perfecta con los demás componentes del sistema. DataGrip soporta múltiples sistemas de gestión de bases de datos, ofreciendo características avanzadas como la navegación por esquemas, la edición inteligente de SQL y la visualización de datos, lo que mejoró nuestra capacidad para gestionar y manipular grandes volúmenes de datos de manera efectiva.
-
-\textbf{NetBeans}
-
-En ciertos desarrollos específicos, utilizamos \textbf{\textit{NetBeans 22}}, un IDE versátil que soporta múltiples lenguajes de programación. NetBeans facilitó el desarrollo de aplicaciones modulares y permitió una integración sencilla con diversas herramientas de desarrollo. Su interfaz intuitiva y sus poderosas características de depuración y gestión de proyectos lo hicieron una opción adecuada para tareas específicas dentro del proyecto.
-
-\textbf{Postman}
-
-Para probar y depurar las API, \textbf{Postman} fue una herramienta esencial. Postman nos permitió realizar solicitudes HTTP de manera eficiente, probar los endpoints del servidor y validar las respuestas. Su interfaz amigable y sus capacidades avanzadas de testing automatizado nos ayudaron a asegurar que todas las comunicaciones entre los componentes del sistema fueran precisas y confiables.
-
-
-\subsection{Fase 2: Diseño de la extensión}
-
-En esta fase se explicará detalladamente el comportamiento de cada proceso necesario para que la extensión de la herramienta funcione correctamente. Se dedicó tiempo a analizar cuál sería la mejor forma de adaptar la nueva funcionalidad a la herramienta sin afectar los componentes existentes.
+\begin{figure}[H]  
+	\centering
+	\includegraphics[width=\textwidth]{cap3_integracion_componentes.png}
+	\caption{Componentes de la extensión.}
+	\label{fig:cap3_integracion_componentes}
+\end{figure}
 
 \textbf{Modelos de IA}
 
@@ -314,7 +336,7 @@ En esta fase se detalla todo lo desarrollado dentro de cada componente. Durante 
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=\textwidth]{cap3_comp_core_openai_pack.png}
+		\includegraphics[width=300px]{cap3_comp_core_openai_pack.png}
 		\caption{Paquetes desarrollados dentro del componente ms-core-tddt4iots-openai.}
 		\label{fig:cap3_comp_core_openai_pack}
 	\end{figure}
@@ -327,36 +349,44 @@ En esta fase se detalla todo lo desarrollado dentro de cada componente. Durante 
 		\item 	Uso de un modelo entrenado, detallando cómo se recibirá la solicitud del cliente y cómo el modelo devolverá la respuesta esperada.
 	\end{enumerate}
 	
-	En la figura \ref{fig:cap3_diagrama_secuencia_tarea1} se detalla el proceso analizado para la creación de los archivos JSONL y su almacenamiento, los cuales serán utilizados posteriormente en el entrenamiento de los modelos de OpenAI. Este diagrama de secuencia ilustra cada paso necesario, desde la generación de los prompts hasta su estructuración en archivos JSONL, así como la ubicación específica donde estos archivos serán almacenados. 
+	En la figura \ref{fig:cap3_diagrama_secuencia_tarea1} se detalla el proceso analizado para la creación de los archivos \texttt{JSONL} y su almacenamiento, los cuales serán utilizados posteriormente en el entrenamiento de los modelos de OpenAI. 
 	
+		\begin{figure}[H]  
+		\centering
+		\includegraphics[width=310px]{cap3_diagrama_secuencia_tarea2.png}
+		\caption{Diagrama de secuencia para explicar a detalle el proceso de entrenamiento del modelo mediante el archivo jsonl.}
+		\label{fig:cap3_diagrama_secuencia_tarea2}
+	\end{figure}	
+	
+	Este diagrama de secuencia ilustra cada paso necesario, desde la generación de los prompts hasta su estructuración en archivos \texttt{JSONL}, así como la ubicación específica donde estos archivos serán almacenados. el Cliente envía una petición con un token de sesión al Servicio REST, que verifica el token con el Servidor. Si el token es válido, el servidor procede a validar el rol del usuario (requiriendo el rol de ``Administrador"). Si el rol es correcto, el sistema valida la existencia del archivo para el entrenamiento y envía los datos a la API de OpenAI para procesar el modelo, almacenando luego los resultados en la Base de Datos. Aunque en la implementación real el Servicio REST y el Servidor podrían ser el mismo objeto, se han separado en el diagrama para detallar mejor las responsabilidades: el Servicio REST maneja la interacción inicial con el cliente, mientras que el Servidor gestiona la lógica interna de validación de roles y el procesamiento de solicitudes complejas, asegurando claridad en el flujo de validación y manejo de datos.
+	
+	La figura \ref{fig:cap3_diagrama_secuencia_tarea2} proporciona una visión clara y estructurada del flujo de acciones necesarias para el entrenamiento del modelo, asegurando que cada etapa del proceso se realice de manera correcta. Comenzando con el Cliente enviando una petición que incluye un token de sesión al Servicio REST. El Servicio REST valida el token consultando con el Servidor. Si el token es válido, el flujo continúa; de lo contrario, se devuelve un mensaje de error al cliente. En el caso de que el token sea válido, el Servidor verifica si el usuario tiene el rol de ``Administrador". Si el rol es correcto, el flujo avanza para validar la existencia del archivo para el entrenamiento del modelo. El Servidor luego procede a enviar el archivo a la API de OpenAI para entrenar el modelo, y los resultados obtenidos son almacenados en la Base de Datos. Finalmente, el servidor envía una confirmación al cliente una vez que los resultados se han guardado correctamente.
+		
+	Finalmente, la figura \ref{fig:cap3_diagrama_secuencia_tarea3} muestra cómo el Cliente envía una petición con un token de sesión y un texto en lenguaje natural al Servicio REST, que valida el token consultando al Servidor. Si el token es válido, el servidor verifica el rol del usuario (debe ser Administrador o Desarrollador) y, si es correcto, envía el texto a la API de OpenAI para que lo interprete. La API devuelve una respuesta en formato JSON, que es reenviada al cliente con un mensaje de éxito. Si el rol o el token no son válidos, se devuelve un mensaje de error. Aunque el Servicio REST y el Servidor podrían ser un único componente, se han separado en el diagrama para detallar mejor las responsabilidades: el Servicio REST maneja la autenticación y el Servidor gestiona la lógica de roles y el envío de la solicitud a OpenAI.
+		
 	\begin{figure}[H]  
 		\centering
 		\includegraphics[width=\textwidth]{cap3_diagrama_secuencia_tarea1.png}
 		\caption{Diagrama de secuencia para explicar a detalle el proceso de crear los archivos jsonl.}
 		\label{fig:cap3_diagrama_secuencia_tarea1}
-	\end{figure}
-	
-	La segunda tarea se centra en cómo se entrenará el modelo. En la figura \ref{fig:cap3_diagrama_secuencia_tarea2} ejecutará de forma automática para llevar a cabo este proceso. Este diagrama proporciona una visión clara y estructurada del flujo de acciones necesarias para el entrenamiento del modelo, asegurando que cada etapa del proceso se realice de manera correcta.
+	\end{figure}	
 	
 	\begin{figure}[H]  
 		\centering
-		\includegraphics[width=\textwidth]{cap3_diagrama_secuencia_tarea2.png}
-		\caption{Diagrama de secuencia para explicar a detalle el proceso de entrenamiento del modelo mediante el archivo jsonl.}
-		\label{fig:cap3_diagrama_secuencia_tarea2}
-	\end{figure}
-	
-	Finalmente, la tarea de implementar o usar el modelo ya entrenado se describe en la figura \ref{fig:cap3_diagrama_secuencia_tarea3}, detallando cada paso mediante un diagrama de secuencia. Para cada petición del cliente, se verifica el token de sesión para controlar quién tiene acceso a estas funcionalidades. El token se mantiene desde el componente existente en la herramienta, realizando una petición a dicho componente para no afectar la funcionalidad actual. Una vez validados los permisos, el servidor realiza una petición a la API de OpenAI para obtener la respuesta esperada.
-	
-	% cap3_diagrama_secuencia_tarea3
-	
-	\begin{figure}[H]  
-		\centering
-		\includegraphics[width=11cm]{cap3_diagrama_secuencia_tarea3.png}
+		\includegraphics[width=\textwidth]{cap3_diagrama_secuencia_tarea3.png}
 		\caption{Diagrama de secuencia para explicar a detalle el proceso de usar  el modelo.}
 		\label{fig:cap3_diagrama_secuencia_tarea3}
 	\end{figure}
-	
+
+	\newpage
 	\item \textbf{ms\_core\_tddt4iots\_py: } En este componente se desarrolló el servidor gRPC para lograr la comunicación con el componente ms-core-tddt4iots-openai, con el objetivo de mantener los microservicios REST de Spring conectados con el cliente de AngularJS. Se implementaron dos métodos principales: uno para el entrenamiento del modelo y otro para su utilización, asegurando una integración eficiente y efectiva entre los distintos componentes del sistema (ver figura \ref{fig:cap3_comp_python_pack}).
+	
+	\begin{figure}[H]  
+		\centering
+		\includegraphics[width=10cm]{cap3_comp_python_pack.png}
+		\caption{Paquetes desarrollados dentro del componente de python.}
+		\label{fig:cap3_comp_python_pack}
+	\end{figure}
 		
 	\begin{itemize}
 		\item \textit{proto}: contiene los archivos \texttt{.proto} que definen las especificaciones de los servicios y mensajes \texttt{gRPC}, fundamentales para generar el código de comunicación.
@@ -366,24 +396,15 @@ En esta fase se detalla todo lo desarrollado dentro de cada componente. Durante 
 	\end{itemize}
 	
 	
-	\begin{figure}[H]  
-		\centering
-		\includegraphics[width=11cm]{cap3_comp_python_pack.png}
-		\caption{Paquetes desarrollados dentro del componente de python.}
-		\label{fig:cap3_comp_python_pack}
-	\end{figure}
-	
-	En la figura \ref{fig:cap3_diagrama_flujo_proceso_a} se muestra el diagrama de flujo sobre el procedimiento seguido para el entrenamiento del modelo. El método recibe una solicitud con formato de cadena JSON con los parámetros necesarios, configura el cliente de OpenAI con una clave API, descarga el archivo JSONL desde la URL especificada, y lo guarda localmente. Luego, sube este archivo a OpenAI para iniciar el proceso de fine-tuning del modelo especificado. Si el proceso se realiza con éxito, devuelve un JSON indicando el estado del entrenamiento y los detalles del fine-tuning. En caso de error, retorna un mensaje de error.
+	En la figura \ref{fig:cap3_diagrama_flujo_proceso_a} se muestra el diagrama de flujo sobre el procedimiento seguido para el entrenamiento del modelo. El método recibe una solicitud con formato de cadena JSON con los parámetros necesarios, configura el cliente de OpenAI con una clave API, descarga el archivo JSONL desde la URL especificada, y lo guarda localmente
 
-	
 	\begin{figure}[H]  
 		\centering
 		\includegraphics[width=\textwidth]{cap3_diagrama_flujo_proceso_a.png}
 		\caption{Entrenamiento de los modelos de OpenAI.}
 		\label{fig:cap3_diagrama_flujo_proceso_a}
 	\end{figure}
-	
-	Para utilizar un modelo entrenado, es fundamental contar con un modelo base previamente entrenado con los datos extraídos de la herramienta. En la figura \ref{fig:cap3_diagrama_flujo_proceso_b} se muestra el proceso paso a paso que se sigue para garantizar el correcto funcionamiento de la extensión y su uso eficiente con la API de OpenAI. El proceso es muy similar al anterior con la deferencia que existe un paso denominado \texttt{Obtener mensaje promt}. Este paso contiene el texto redactado en lenguaje natural y ademas 1 mensaje en especifico detallando lo que debe realizar el modelo entrenado. 
+	Luego, sube este archivo a OpenAI para iniciar el proceso de fine-tuning del modelo especificado. Si el proceso se realiza con éxito, devuelve un JSON indicando el estado del entrenamiento y los detalles del fine-tuning. En caso de error, retorna un mensaje de error.
 	
 	\begin{figure}[H]  
 		\centering
@@ -391,6 +412,8 @@ En esta fase se detalla todo lo desarrollado dentro de cada componente. Durante 
 		\caption{Uso de los modelos entrenados por OpenAI.}
 		\label{fig:cap3_diagrama_flujo_proceso_b}
 	\end{figure}
+	
+	Para utilizar un modelo entrenado, es fundamental contar con un modelo base previamente entrenado con los datos extraídos de la herramienta. En la figura \ref{fig:cap3_diagrama_flujo_proceso_b} se muestra el proceso paso a paso que se sigue para garantizar el correcto funcionamiento de la extensión y su uso eficiente con la API de OpenAI. El proceso es muy similar al anterior con la deferencia que existe un paso denominado \texttt{Obtener mensaje promt}. Este paso contiene el texto redactado en lenguaje natural y ademas 1 mensaje en especifico detallando lo que debe realizar el modelo entrenado. 
 	
 	\item \textbf{armadillo-api: } En la herramienta actual, había un intérprete denominado ArmadilloJs que permitía convertir las descripciones de los casos de uso redactados en un conjunto de símbolos, los cuales identificaban los componentes para su diagrama de clases. Este intérprete estaba desarrollado como una biblioteca de JavaScript. Sin embargo, se ha planteado la necesidad de transformar esta biblioteca en un servicio web, para poder utilizar sus funciones internamente dentro del componente que entrena el modelo de inteligencia artificial. El objetivo de esta transformación es interpretar las descripciones de los casos de uso de los proyectos existentes y obtener el texto en lenguaje natural, con el fin de entrenar el modelo de inteligencia artificial de manera más eficaz (ver figura \ref{fig:cap3_comp_armadillo}). 
 	
@@ -403,29 +426,40 @@ En esta fase se detalla todo lo desarrollado dentro de cada componente. Durante 
 	
 \end{itemize}
 
-\subsection{Fase 5: Integración de los componentes}
+\subsubsection{Herramientas de soporte al desarrollo de software}
 
-En la figura \ref{fig:cap3_integracion_componentes} se puede visualizar la comunicación entre todos los componentes que controlan el correcto funcionamiento de la extensión. El funcionamiento de los componentes es del a siguiente manera:
+Durante el desarrollo de nuestro proyecto, se utilizaron diversas herramientas de software proporcionadas por JetBrains (\url{https://www.jetbrains.com}) para maximizar la eficiencia y productividad. JetBrains ofrece un conjunto robusto de entornos de desarrollo integrado (IDE) que se adaptan a diversas necesidades y lenguajes de programación. El uso de estas herramientas avanzadas nos permitió abordar diversas fases del desarrollo con mayor eficiencia y precisión. Las herramientas utilizadas y su aportación al desarrollo del software realizado se describen a continuación.
 
-\begin{enumerate}
-	\item \textbf{db-repository-tddt4iots:} Contiene todos los objetos necesarios para acceder a los datos de forma óptima.
-	\item \textbf{ms-core-tddt4iots:} Mantiene separados los recursos reutilizables por toda la extensión, además de contener los DTO necesarios para las peticiones entre el cliente y el servidor.
-	\item \textbf{ms-core-tddt4iots-openai:} Es el componente principal del proyecto, consumiendo los recursos de los componentes mencionados anteriormente, utilizados como dependencias mediante Maven.
-	\item \textbf{ms\_core\_tddt4iots\_py:} Establece la comunicación con OpenAI y configura lo necesario para realizar entrenamientos e implementar los modelos.
-	\item \textbf{armadillo-api:} API RestFul que interpreta casos de uso redactados en lenguaje de símbolos para obtener texto en lenguaje natural y crear archivos de entrenamiento.
-\end{enumerate}
+\textbf{IntelliJ IDEA}
 
-	\begin{figure}[H]  
-		\centering
-		\includegraphics[width=\textwidth]{cap3_integracion_componentes.png}
-		\caption{Componentes de la extensión.}
-		\label{fig:cap3_integracion_componentes}
-	\end{figure}
+Para el desarrollo en Java, utilizamos \textbf{\textit{IntelliJ IDEA 2024.1.4}}, que proporcionó un entorno robusto y eficiente. Este IDE fue fundamental para la integración de Spring Framework y la gestión de microservicios, permitiéndonos escribir, probar y depurar código de manera efectiva. Las características avanzadas de IntelliJ, como la autocompletación inteligente, el análisis de código en tiempo real y las herramientas de refactorización, mejoraron significativamente nuestra productividad y calidad del código.
+
+\textbf{WebStorm}
+
+En el desarrollo de interfaces web, \textbf{\textit{WebStorm 2023.3.1}} fue la herramienta elegida por su capacidad para manejar tecnologías modernas como AngularJS. WebStorm facilitó la creación de interfaces web responsivas y dinámicas, proporcionando un entorno de desarrollo con soporte completo para JavaScript, TypeScript, HTML y CSS. Las capacidades de depuración en vivo y las herramientas de desarrollo front-end de WebStorm nos permitieron iterar rápidamente y mantener un alto estándar de calidad en nuestras interfaces de usuario.
+
+\textbf{PyCharm}
+
+Para los scripts en Python que gestionan la comunicación con la API de OpenAI, utilizamos \textbf{\textit{PyCharm 2023.3.4}}. Este IDE es reconocido por su excelente soporte para el desarrollo en Python, especialmente en proyectos de inteligencia artificial y análisis de datos. PyCharm proporcionó herramientas integradas para la gestión de entornos virtuales, el análisis de código y la depuración, lo que facilitó la implementación de soluciones robustas y eficientes para la comunicación con OpenAI.
+
+\textbf{DataGrip}
+
+La gestión de bases de datos fue mejorada significativamente mediante el uso de \textbf{\textit{DataGrip 2023.2.3}}. Esta herramienta nos permitió realizar un análisis eficiente y una integración perfecta con los demás componentes del sistema. DataGrip soporta múltiples sistemas de gestión de bases de datos, ofreciendo características avanzadas como la navegación por esquemas, la edición inteligente de SQL y la visualización de datos, lo que mejoró nuestra capacidad para gestionar y manipular grandes volúmenes de datos de manera efectiva.
+
+\textbf{NetBeans}
+
+En ciertos desarrollos específicos, utilizamos \textbf{\textit{NetBeans 22}}, un IDE versátil que soporta múltiples lenguajes de programación. NetBeans facilitó el desarrollo de aplicaciones modulares y permitió una integración sencilla con diversas herramientas de desarrollo. Su interfaz intuitiva y sus poderosas características de depuración y gestión de proyectos lo hicieron una opción adecuada para tareas específicas dentro del proyecto.
+
+\newpage
+\textbf{Postman}
+
+Para probar y depurar las API, \textbf{Postman} fue una herramienta esencial. Postman nos permitió realizar solicitudes HTTP de manera eficiente, probar los endpoints del servidor y validar las respuestas. Su interfaz amigable y sus capacidades avanzadas de testing automatizado nos ayudaron a asegurar que todas las comunicaciones entre los componentes del sistema fueran precisas y confiables.
+
 
 
 \section{Metodología para desarrollar la aplicación web}
 
-La metodología Modelo-Vista-Controlador (MVC) es una de las arquitecturas de software más utilizadas en el desarrollo de aplicaciones web debido a su capacidad para separar las preocupaciones, facilitando así el mantenimiento y escalabilidad del proyecto. Esta metodología divide la aplicación en tres componentes principales: el Modelo, la Vista y el Controlador.
+La metodología Modelo-Vista-Controlador (MVC) \cite{Deinum2012} es una de las arquitecturas de software más utilizadas en el desarrollo de aplicaciones web debido a su capacidad para separar las preocupaciones, facilitando así el mantenimiento y escalabilidad del proyecto. Esta metodología divide la aplicación en tres componentes principales: el Modelo, la Vista y el Controlador.
 
 \begin{itemize}
 	\item \textbf{Modelo:} Representa la lógica de la aplicación y la estructura de datos. Es responsable de gestionar los datos de la aplicación, respondiendo a las solicitudes del controlador y actualizando la vista cuando la información cambia. El modelo interactúa con la base de datos y maneja las reglas de negocio.
@@ -459,7 +493,7 @@ En la figura \ref{fig:cap3_interfaz_003} se observa el formulario que aparecerá
 
 \begin{figure}[H]  
 	\centering
-	\includegraphics[width=270px]{interfaz003.png} 
+	\includegraphics[width=240px]{interfaz003.png} 
 	\caption{Formulario para ingresar la clave secreta de OpenAi.}
 	\label{fig:cap3_interfaz_003}
 \end{figure}
@@ -468,25 +502,27 @@ La figura \ref{fig:cap3_interfaz_004} muestra en en el recuadro rojo la opción 
  
 \begin{figure}[H]  
 	\centering
-	\includegraphics[width=170px]{interfaz004.png} 
+	\includegraphics[width=140px]{interfaz004.png} 
 	\caption{Opcion para configurar la API de OpenAI.}
 	\label{fig:cap3_interfaz_004}
 \end{figure}
 
-Al acceder a la opción de \textit{``Settings"}, aparece un formulario que está dividido en dos secciones (ver figura \ref{fig:cap3_interfaz_005}). La opción de \textit{``OpenAI"} muestra los modelos disponibles en la herramienta. En la primera subsección, se visualizan los modelos base de la herramienta, destacándose en color azul el modelo base que ha sido seleccionado por el usuario. En la segunda subsección, se muestra el tipo de uso que el usuario está aplicando al modelo. En este caso, el modelo base seleccionado está siendo utilizado específicamente para interpretar el texto natural enviado a través de las descripciones de los casos de uso.
+Al acceder a la opción de \textit{``Settings"}, aparece un formulario que está dividido en dos secciones (ver figura \ref{fig:cap3_interfaz_005}). La opción de \textit{``OpenAI"} muestra los modelos disponibles en la herramienta. 
 
 \begin{figure}[H]  
-	\centering
-	\includegraphics[width=\textwidth]{interfaz005.png} 
-	\caption{Formulario de configuración de los modelos de OpenAi. Modelos base y el uso que le dará el usuario.}
-	\label{fig:cap3_interfaz_005}
+\centering
+\includegraphics[width=300px]{interfaz005.png} 
+\caption{Formulario de configuración de los modelos de OpenAi. Modelos base y el uso que le dará el usuario.}
+\label{fig:cap3_interfaz_005}
 \end{figure}
 
-La sección de \textit{``Training"} muestra la información sobre los entrenamientos realizados sobre le modelo base que se encuentra seleccionado. Además, se observa el nombre del usuario quien realizo el entrenamiento respectivo al modelo (ver figura \ref{fig:cap3_interfaz_006} y \ref{fig:cap3_interfaz_007}).
+En la primera subsección, se visualizan los modelos base de la herramienta, destacándose en color azul el modelo base que ha sido seleccionado por el usuario. En la segunda subsección, se muestra el tipo de uso que el usuario está aplicando al modelo. En este caso, el modelo base seleccionado está siendo utilizado específicamente para interpretar el texto natural enviado a través de las descripciones de los casos de uso.
+
+La sección de \textit{``Training"} muestra la información sobre los entrenamientos realizados sobre le modelo base que se encuentra seleccionado. Además, se observa el nombre del usuario quien realizo el entrenamiento respectivo al modelo (ver figura \ref{fig:cap3_interfaz_006}).
 
 \begin{figure}[H]  
  	\centering
- 	\includegraphics[width=270px]{interfaz006.png} 
+ 	\includegraphics[width=\textwidth]{interfaz006.png} 
  	\caption{Formulario de configuración de los modelos de OpenAi. Entrenamiento de los modelos base y su modelo seleccionado.}
  	\label{fig:cap3_interfaz_006}
 \end{figure}
@@ -575,14 +611,7 @@ Finalmente, en la figura \ref{fig:cap3_interfaz_016} se muestra como la herramie
 
 Para evaluar la efectividad de la herramienta, se contactó con 15 estudiantes de la Universidad Técnica Estatal de Quevedo, Ecuador. A estos estudiantes se les solicitó que utilizaran la herramienta y cargaran uno de los proyectos en los que estuvieran trabajando durante sus estudios, creando el diagrama de casos de uso para su sistema IoT. Una vez redactadas las descripciones de los casos de uso en lenguaje natural, la herramienta analizó cada proyecto y genero automáticamente el diagrama de clases correspondiente para cada proyecto.
 
-A cada estudiante se le envió la invitación a un documento compartido para que pudieran ingresar las descripciones de los casos de uso y tener documentado todos los proyectos que se ingresaron en la herramienta para su respectiva evaluación. En la figura \ref{fig:cap3_evaluacion_001} se muestra el documento de texto que fue compartido y se observan las descripciones de los casos de uso de cada proyecto.
-
- \begin{figure}[H]  
-	\centering
-	\includegraphics[width=\textwidth]{evaluacion001.png} 
-	\caption{Documento de texto compartido con todos los proyectos ingresados para evaluar la extensión de la herramienta.}
-	\label{fig:cap3_evaluacion_001}
-\end{figure}
+A cada estudiante se le envió la invitación a un documento compartido para que pudieran ingresar las descripciones de los casos de uso y tener documentado todos los proyectos que se ingresaron en la herramienta para su respectiva evaluación. En el siguiente enlace (\url{https://acortar.link/pqSAZi}) se muestra el documento de texto que fue compartido y se observan las descripciones de los casos de uso de cada proyecto.
 
 Para las descripciones de los casos de uso se les indico una plantilla para que puedan documentarla y sea mas fácil ingresarlos dentro de la herramienta. 
 
@@ -735,7 +764,7 @@ La figura \ref{fig:cap3_proyecto_001} muestra el diagrama de casos de uso del pr
 
  \begin{figure}[H]  
 	\centering
-	\includegraphics[width=\textwidth]{proyecto001.png} 
+	\includegraphics[width=300px]{proyecto001.png} 
 	\caption{Diagrama de casos de uso para el Sistema de Monitoreo de Cultivos Inteligente con IoT.}
 	\label{fig:cap3_proyecto_001}
 \end{figure}
